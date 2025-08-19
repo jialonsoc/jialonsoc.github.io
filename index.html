@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CV Jaime Alonso Correa</title>
+  <meta name="description" content="Currículum Vitae de Jaime Alonso Correa" />
+  <style>
+    :root { --bg:#0b0c10; --fg:#f7f7f7; --accent:#7bb8ff; }
+    html,body { height:100%; margin:0; }
+    body { background:var(--bg); color:var(--fg); font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; }
+    header,footer { padding:12px 16px; display:flex; align-items:center; justify-content:space-between; gap:8px; }
+    header a, footer a { color:var(--accent); text-decoration:none; }
+    .btn { border:1px solid var(--accent); padding:8px 12px; border-radius:12px; }
+    .viewer { height: calc(100% - 112px); } /* header+footer */
+    .fallback { padding:24px; text-align:center; }
+    embed, iframe { width:100%; height:100%; border:0; display:block; }
+  </style>
+</head>
+<body>
+  <header>
+    <strong>CV de Jaime Alonso Correa</strong>
+    <nav>
+      <a class="btn" href="CV_JAIME_ALONSO_CORREA_WEB.pdf" download>Descargar PDF</a>
+      <a class="btn" href="https://github.com/TUUSUARIO" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+  </header>
+
+  <main class="viewer" id="viewer">
+    <embed src="CV_JAIME_ALONSO_CORREA_WEB.pdf#toolbar=1&navpanes=0&view=FitH" type="application/pdf" />
+    <div class="fallback">
+      <p>Tu navegador no puede mostrar el PDF incrustado.</p>
+      <p><a class="btn" href="CV_JAIME_ALONSO_CORREA_WEB.pdf">Abrir el CV</a> o <a class="btn" href="CV_JAIME_ALONSO_CORREA_WEB.pdf" download>Descargar</a></p>
+    </div>
+  </main>
+
+  <footer>
+    <small>© <span id="y"></span> Jaime Alonso Correa — Hecho con ♥</small>
+    <small><a href="CV_JAIME_ALONSO_CORREA_WEB.pdf">Enlace directo al PDF</a></small>
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
