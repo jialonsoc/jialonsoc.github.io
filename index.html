@@ -3,44 +3,267 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CV Jaime Alonso Correa</title>
-  <meta name="description" content="Currículum Vitae de Jaime Alonso Correa" />
+  <title>Jaime Alonso Correa — Portafolio & CV</title>
+  <meta name="description" content="Portafolio, CV y proyectos de Jaime Alonso Correa. Contacto para cotizaciones." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧰</text></svg>">
   <style>
-    :root { --bg:#0b0c10; --fg:#f7f7f7; --accent:#7bb8ff; }
-    html,body { height:100%; margin:0; }
-    body { background:var(--bg); color:var(--fg); font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; }
-    header,footer { padding:12px 16px; display:flex; align-items:center; justify-content:space-between; gap:8px; }
-    header a, footer a { color:var(--accent); text-decoration:none; }
-    .btn { border:1px solid var(--accent); padding:8px 12px; border-radius:12px; }
-    .viewer { height: calc(100% - 112px); } /* header+footer */
-    .fallback { padding:24px; text-align:center; }
-    embed, iframe { width:100%; height:100%; border:0; display:block; }
+    :root{
+      --bg:#0b0c10; --card:#15171c; --fg:#f5f7fa; --muted:#c7cbd3; --accent:#8ad0ff; --border:#1f232b; --maxw:1100px
+    }
+    [data-theme="light"]{
+      --bg:#f6f7fb; --card:#ffffff; --fg:#0b1020; --muted:#4b5565; --accent:#2563eb; --border:#e5e7ef
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+    a{color:var(--accent);text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{max-width:var(--maxw);margin:0 auto;padding:0 18px}
+    header{position:sticky;top:0;z-index:20;background:rgba(11,12,16,.85);backdrop-filter:saturate(140%) blur(6px);border-bottom:1px solid var(--border)}
+    [data-theme="light"] header{background:rgba(246,247,251,.85)}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
+    .nav h1{font-size:18px;margin:0}
+    .nav ul{display:flex;gap:12px;list-style:none;margin:0;padding:0}
+    .chip{border:1px solid var(--border);padding:8px 12px;border-radius:999px}
+    .chip:hover{border-color:var(--accent)}
+    .toggle{border:1px solid var(--accent);padding:6px 10px;border-radius:999px;cursor:pointer}
+    .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;align-items:stretch;margin:24px 0}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:22px}
+    .btn{border:1px solid var(--accent);color:var(--accent);padding:10px 14px;border-radius:12px;display:inline-block}
+    .btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+    .btns{display:flex;gap:10px;flex-wrap:wrap}
+    section{margin:26px 0}
+    h2{margin:0 0 12px 0}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .project{display:flex;flex-direction:column;gap:10px}
+    .project img{height:160px;object-fit:cover;border-radius:12px;border:1px solid var(--border)}
+    .tags{display:flex;gap:8px;flex-wrap:wrap}
+    .tags span{font-size:12px;border:1px solid var(--border);padding:4px 8px;border-radius:999px;color:var(--muted)}
+    .embedwrap{height:70vh}
+    .embedwrap embed{width:100%;height:100%;border:0;border-radius:12px;border:1px solid var(--border)}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    input,textarea,button{font:inherit}
+    input,textarea{background:transparent;border:1px solid var(--border);color:var(--fg);border-radius:10px;padding:10px}
+    textarea{min-height:120px;resize:vertical}
+    button{background:transparent;border:1px solid var(--accent);color:var(--accent);padding:10px 14px;border-radius:12px;cursor:pointer}
+    button:hover{opacity:.9}
+    footer{border-top:1px solid var(--border);color:var(--muted);padding:18px 0;margin-top:24px}
+    .muted{color:var(--muted)}
+    @media (max-width: 900px){ .hero{grid-template-columns:1fr} .grid-3{grid-template-columns:1fr 1fr} .grid-2{grid-template-columns:1fr} .embedwrap{height:64vh} }
+    @media (max-width: 580px){ .grid-3{grid-template-columns:1fr} .embedwrap{height:56vh} }
+    /* Modal simple */
+    dialog{border:none;background:transparent;padding:0}
+    dialog::backdrop{background:rgba(0,0,0,.85)}
+    .modal{max-width:min(92vw,900px)}
+    .modal .inner{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:10px}
+    .modal img{width:100%;height:auto;object-fit:contain;border-radius:12px}
+    .close{position:absolute;top:10px;right:14px}
   </style>
 </head>
 <body>
+  <script>
+    // Tema claro/oscuro persistente
+    const saved = localStorage.getItem("theme");
+    if(saved) document.documentElement.setAttribute("data-theme", saved);
+  </script>
+
   <header>
-    <strong>CV de Jaime Alonso Correa</strong>
-    <nav>
-      <a class="btn" href="CV_JAIME_ALONSO_CORREA_WEB.pdf" download>Descargar PDF</a>
-      <a class="btn" href="https://github.com/TUUSUARIO" target="_blank" rel="noopener">GitHub</a>
-    </nav>
+    <div class="container nav">
+      <h1>Jaime Alonso Correa</h1>
+      <ul>
+        <li><a class="chip" href="#proyectos">Proyectos</a></li>
+        <li><a class="chip" href="#cv">CV</a></li>
+        <li><a class="chip" href="#contacto">Contacto</a></li>
+      </ul>
+      <button class="toggle" id="themeBtn">🌙/☀️</button>
+    </div>
   </header>
 
-  <main class="viewer" id="viewer">
-    <embed src="CV_JAIME_ALONSO_CORREA_WEB.pdf#toolbar=1&navpanes=0&view=FitH" type="application/pdf" />
-    <div class="fallback">
-      <p>Tu navegador no puede mostrar el PDF incrustado.</p>
-      <p><a class="btn" href="CV_JAIME_ALONSO_CORREA_WEB.pdf">Abrir el CV</a> o <a class="btn" href="CV_JAIME_ALONSO_CORREA_WEB.pdf" download>Descargar</a></p>
-    </div>
+  <main class="container">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="card">
+        <h2>Diseño de CVs y Portafolios</h2>
+        <p class="muted">Creo CVs claros y profesionales, optimizados para ATS y con diseño moderno. También construyo páginas personales como esta para mostrar tus proyectos.</p>
+        <div class="btns">
+          <a class="btn primary" href="#contacto">Quiero cotizar</a>
+          <a class="btn" href="#proyectos">Ver proyectos</a>
+          <a class="btn" href="CV_JAIME_ALONSO_CORREA_WEB.pdf" download>Descargar mi CV</a>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Resumen</h3>
+        <ul>
+          <li>✦ Especialista en CVs y portafolios web</li>
+          <li>✦ Entrega rápida y asesoría de contenido</li>
+          <li>✦ Soporte post-entrega</li>
+        </ul>
+        <p class="muted">*Disponible para proyectos en Chile y remoto.</p>
+      </div>
+    </section>
+
+    <!-- PROYECTOS -->
+    <section id="proyectos">
+      <h2>Proyectos</h2>
+      <p class="muted">Algunos trabajos recientes. Pide el tuyo y lo adaptamos a tu perfil profesional.</p>
+
+      <div class="grid-3" id="projectsGrid">
+        <!-- Se llenará con JS desde projects[] -->
+      </div>
+    </section>
+
+    <!-- CV -->
+    <section id="cv">
+      <h2>Mi CV</h2>
+      <div class="card embedwrap">
+        <embed src="CV_JAIME_ALONSO_CORREA_WEB.pdf#toolbar=1&navpanes=0&view=FitH" type="application/pdf" />
+        <p class="muted" style="margin-top:10px">Si no ves el visor, <a href="CV_JAIME_ALONSO_CORREA_WEB.pdf" target="_blank">abre el PDF</a> o <a href="CV_JAIME_ALONSO_CORREA_WEB.pdf" download>descárgalo</a>.</p>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto">
+      <h2>Contacto y cotizaciones</h2>
+      <div class="grid-2">
+        <div class="card">
+          <form action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+            <!-- TODO: Reemplaza YOUR_FORMSPREE_ID por el tuyo. O pega aquí un iframe de Google Forms. -->
+            <input name="name" placeholder="Tu nombre" required>
+            <input type="email" name="email" placeholder="Tu correo" required>
+            <input name="subject" placeholder="Asunto (p. ej., 'CV Profesional')" required>
+            <textarea name="message" placeholder="Cuéntame qué necesitas: tipo de CV, plazo, referencias de estilo…" required></textarea>
+            <button type="submit">Enviar consulta</button>
+            <p class="muted">Uso tus datos solo para responder tu solicitud.</p>
+          </form>
+        </div>
+        <div class="card">
+          <h3>También puedes escribir</h3>
+          <p>
+            📧 <a href="mailto:jaime.correa@ejemplo.cl">jaime.correa@ejemplo.cl</a> <!-- TODO: tu email -->
+            <br>
+            📱 <a href="https://wa.me/56912345678?text=Hola%20Jaime,%20quiero%20cotizar%20un%20CV" target="_blank" rel="noopener">WhatsApp</a> <!-- TODO: tu número en formato internacional -->
+            <br>
+            🔗 <a href="https://github.com/jialonsoc" target="_blank" rel="noopener">GitHub</a>
+            · <a href="https://www.linkedin.com/in/TU-LINKEDIN" target="_blank" rel="noopener">LinkedIn</a> <!-- TODO -->
+          </p>
+          <h3>Proceso</h3>
+          <ol>
+            <li>Brief por WhatsApp o correo</li>
+            <li>Primer borrador en 48–72 h</li>
+            <li>Iteraciones y entrega final (PDF + editables)</li>
+          </ol>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer>
-    <small>© <span id="y"></span> Jaime Alonso Correa</small>
-    <small><a href="CV_JAIME_ALONSO_CORREA_WEB.pdf">Enlace directo al PDF</a></small>
+    <div class="container" style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+      <small>© <span id="y"></span> Jaime Alonso Correa</small>
+      <small class="muted">Hecho con GitHub Pages</small>
+    </div>
   </footer>
 
+  <!-- Modal para imágenes de proyectos -->
+  <dialog id="lightbox" class="modal">
+    <div class="inner">
+      <button class="btn close" onclick="document.getElementById('lightbox').close()">Cerrar ✕</button>
+      <img id="lightImg" alt="">
+      <div style="padding:10px">
+        <h3 id="lightTitle" style="margin:8px 0"></h3>
+        <p id="lightDesc" class="muted" style="margin:0"></p>
+      </div>
+    </div>
+  </dialog>
+
   <script>
+    // Toggle tema
+    const tbtn = document.getElementById('themeBtn');
+    tbtn?.addEventListener('click', ()=>{
+      const cur = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', cur);
+      localStorage.setItem('theme', cur);
+    });
+    // Año dinámico
     document.getElementById('y').textContent = new Date().getFullYear();
+
+    // === PROYECTOS: edita este arreglo con tus trabajos ===
+    const projects = [
+      {
+        title: "CV Ejecutivo Minimal",
+        thumb: "images/p1.jpg",  // TODO: sube / cambia
+        full:  "images/p1.jpg",
+        desc:  "CV limpio, compatible con ATS y tipografías del sistema.",
+        tags:  ["CV", "ATS", "Diseño"],
+        link:  "#" // o URL del proyecto
+      },
+      {
+        title: "Portfolio Personal Estático",
+        thumb: "images/p2.jpg",
+        full:  "images/p2.jpg",
+        desc:  "Sitio one-page para mostrar proyectos y contacto.",
+        tags:  ["Web", "HTML/CSS/JS"],
+        link:  "https://jialonsoc.github.io"
+      },
+      {
+        title: "CV Académico con logros",
+        thumb: "images/p3.jpg",
+        full:  "images/p3.jpg",
+        desc:  "Énfasis en publicaciones, premios y docencia.",
+        tags:  ["CV", "Académico"],
+        link:  "#"
+      }
+      // Agrega más objetos…
+    ];
+
+    // Render cards
+    const grid = document.getElementById('projectsGrid');
+    function tagSpans(tags){ return tags.map(t=>`<span>${t}</span>`).join('') }
+    grid.innerHTML = projects.map((p,i)=>`
+      <article class="card project">
+        <img src="${p.thumb}" alt="${p.title}" loading="lazy" data-i="${i}">
+        <div style="display:flex;justify-content:space-between;gap:10px;align-items:center">
+          <h3 style="margin:0">${p.title}</h3>
+          ${p.link && p.link !== "#" ? `<a class="btn" href="${p.link}" target="_blank" rel="noopener">Ver</a>` : ``}
+        </div>
+        <p class="muted" style="margin:0">${p.desc}</p>
+        <div class="tags">${tagSpans(p.tags||[])}</div>
+      </article>
+    `).join('');
+
+    // Lightbox
+    const dlg = document.getElementById('lightbox');
+    const lightImg = document.getElementById('lightImg');
+    const lightTitle = document.getElementById('lightTitle');
+    const lightDesc = document.getElementById('lightDesc');
+    grid.addEventListener('click', e=>{
+      const img = e.target.closest('img[data-i]');
+      if(!img) return;
+      const p = projects[img.dataset.i];
+      lightImg.src = p.full || p.thumb; lightImg.alt = p.title;
+      lightTitle.textContent = p.title; lightDesc.textContent = p.desc || '';
+      dlg.showModal();
+    });
+    dlg.addEventListener('click', (e)=>{
+      const r = dlg.getBoundingClientRect();
+      const inside = e.clientX>r.left && e.clientX<r.right && e.clientY>r.top && e.clientY<r.bottom;
+      if(!inside) dlg.close();
+    });
+  </script>
+
+  <!-- JSON-LD básico para SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Jaime Alonso Correa",
+    "url": "https://jialonsoc.github.io",
+    "sameAs": [
+      "https://github.com/jialonsoc",
+      "https://www.linkedin.com/in/TU-LINKEDIN"
+    ],
+    "email": "mailto:jaime.correa@ejemplo.cl",
+    "jobTitle": "Diseñador de CVs y Portafolios"
+  }
   </script>
 </body>
 </html>
