@@ -1,1 +1,27 @@
+[
+  {
+    "title": "CV Ejecutivo Minimal",
+    "thumb": "images/p1.jpg",
+    "full": "images/p1.jpg",
+    "desc": "CV limpio y compatible con ATS.",
+    "tags": ["CV", "ATS", "Diseño"],
+    "link": ""
+  },
+  {
+    "title": "Portfolio Personal Estático",
+    "thumb": "images/p2.jpg",
+    "full": "images/p2.jpg",
+    "desc": "Sitio one-page para mostrar proyectos y contacto.",
+    "tags": ["Web", "HTML/CSS/JS"],
+    "link": "https://jialonsoc.github.io"
+  },
+  {
+    "title": "CV Académico con logros",
+    "thumb": "images/p3.jpg",
+    "full": "images/p3.jpg",
+    "desc": "Énfasis en publicaciones y docencia.",
+    "tags": ["CV", "Académico"],
+    "link": ""
+  }
+]
 
