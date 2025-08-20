@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Jaime Alonso Correa — Portafolio & CV</title>
   <meta name="description" content="Portafolio, CV y proyectos de Jaime Alonso Correa. Contacto para cotizaciones." />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧰</text></svg>">
+
   <style>
     :root{
       --bg:#0b0c10; --card:#15171c; --fg:#f5f7fa; --muted:#c7cbd3; --accent:#8ad0ff; --border:#1f232b; --maxw:1100px
@@ -17,15 +19,26 @@
     html,body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
     a{color:var(--accent);text-decoration:none}
     img{max-width:100%;display:block}
-    .container{max-width:var(--maxw);margin:0 auto;padding:0 18px}
+    .container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+
+    /* ====== NAVBAR RESPONSIVE ====== */
     header{position:sticky;top:0;z-index:20;background:rgba(11,12,16,.85);backdrop-filter:saturate(140%) blur(6px);border-bottom:1px solid var(--border)}
     [data-theme="light"] header{background:rgba(246,247,251,.85)}
-    .nav{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0}
     .nav h1{font-size:18px;margin:0}
-    .nav ul{display:flex;gap:12px;list-style:none;margin:0;padding:0}
-    .chip{border:1px solid var(--border);padding:8px 12px;border-radius:999px}
-    .chip:hover{border-color:var(--accent)}
+    .nav__links{display:flex;gap:10px;list-style:none;margin:0;padding:0}
+    .nav__links a{padding:10px 12px;border:1px solid var(--border);border-radius:999px}
+    .nav__links a:hover{border-color:var(--accent)}
+    .nav__toggle{display:none;border:1px solid var(--accent);background:transparent;color:var(--accent);padding:8px 10px;border-radius:10px}
     .toggle{border:1px solid var(--accent);padding:6px 10px;border-radius:999px;cursor:pointer}
+
+    @media (max-width: 800px){
+      .nav__toggle{display:inline-block}
+      .nav__links{display:none;position:fixed;inset:56px 12px auto 12px;flex-direction:column;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:10px}
+      .nav__links.is-open{display:flex}
+    }
+
+    /* ====== LAYOUT & CARDS ====== */
     .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;align-items:stretch;margin:24px 0}
     .card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:22px}
     .btn{border:1px solid var(--accent);color:var(--accent);padding:10px 14px;border-radius:12px;display:inline-block}
@@ -33,29 +46,54 @@
     .btns{display:flex;gap:10px;flex-wrap:wrap}
     section{margin:26px 0}
     h2{margin:0 0 12px 0}
+    .muted{color:var(--muted)}
+
+    /* Rejillas */
     .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    @media (max-width: 1024px){ .grid-3{grid-template-columns:repeat(2,1fr)} }
+    @media (max-width: 600px){ .grid-3{grid-template-columns:1fr} }
+
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    @media (max-width: 900px){ .grid-2{grid-template-columns:1fr} }
+
+    /* Proyectos */
     .project{display:flex;flex-direction:column;gap:10px}
-    .project img{height:160px;object-fit:cover;border-radius:12px;border:1px solid var(--border)}
+    .project img{height:clamp(160px, 24vw, 220px);object-fit:cover;border-radius:12px;border:1px solid var(--border)}
     .tags{display:flex;gap:8px;flex-wrap:wrap}
     .tags span{font-size:12px;border:1px solid var(--border);padding:4px 8px;border-radius:999px;color:var(--muted)}
-    .embedwrap{height:70vh}
+
+    /* Visor PDF adaptativo */
+    .embedwrap{height:min(72vh, 900px)}
+    @media (max-width: 600px){ .embedwrap{height:60vh} }
     .embedwrap embed{width:100%;height:100%;border:0;border-radius:12px;border:1px solid var(--border)}
-    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+
     input,textarea,button{font:inherit}
     input,textarea{background:transparent;border:1px solid var(--border);color:var(--fg);border-radius:10px;padding:10px}
     textarea{min-height:120px;resize:vertical}
     button{background:transparent;border:1px solid var(--accent);color:var(--accent);padding:10px 14px;border-radius:12px;cursor:pointer}
     button:hover{opacity:.9}
+
     footer{border-top:1px solid var(--border);color:var(--muted);padding:18px 0;margin-top:24px}
-    .muted{color:var(--muted)}
-    @media (max-width: 900px){ .hero{grid-template-columns:1fr} .grid-3{grid-template-columns:1fr 1fr} .grid-2{grid-template-columns:1fr} .embedwrap{height:64vh} }
-    @media (max-width: 580px){ .grid-3{grid-template-columns:1fr} .embedwrap{height:56vh} }
+
+    /* Modal / Lightbox */
     dialog{border:none;background:transparent;padding:0}
     dialog::backdrop{background:rgba(0,0,0,.85)}
     .modal{max-width:min(92vw,900px)}
     .modal .inner{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:10px}
     .modal img{width:100%;height:auto;object-fit:contain;border-radius:12px}
     .close{position:absolute;top:10px;right:14px}
+
+    /* Accesibilidad táctil */
+    .btn, button, .nav__links a{min-height:44px}
+
+    /* Tipografía fluida */
+    html{font-size:16px}
+    @media (max-width: 900px){ html{font-size:15px} }
+    @media (max-width: 600px){ html{font-size:14px} }
+
+    @media (prefers-reduced-motion: reduce){
+      *{animation:none !important;transition:none !important}
+    }
   </style>
 </head>
 <body>
@@ -64,27 +102,30 @@
     if(saved) document.documentElement.setAttribute("data-theme", saved);
   </script>
 
+  <!-- ====== NAVBAR ====== -->
   <header>
     <div class="container nav">
       <h1>Jaime Alonso Correa</h1>
-      <ul>
-        <li><a class="chip" href="#proyectos">Proyectos</a></li>
-        <li><a class="chip" href="#cv">CV</a></li>
-        <li><a class="chip" href="#contacto">Contacto</a></li>
+      <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">Menú ☰</button>
+      <ul class="nav__links" id="navLinks">
+        <li><a href="#proyectos">Proyectos</a></li>
+        <li><a href="#cv">CV</a></li>
+        <li><a href="#contacto">Contacto</a></li>
       </ul>
-      <button class="toggle" id="themeBtn">🌙/☀️</button>
+      <button class="toggle" id="themeBtn" aria-label="Cambiar tema">🌙/☀️</button>
     </div>
   </header>
 
   <main class="container">
+    <!-- ====== HERO ====== -->
     <section class="hero">
       <div class="card">
         <h2>Aplicaciones Web</h2>
-        <p class="muted">Diseño y Creación de Proyectos web, Manejos de bases de Datos, Transformaciones Digitales para empresas y personas.</p>
+        <p class="muted">Diseño y creación de proyectos web, manejo de bases de datos y transformaciones digitales para empresas y personas.</p>
         <div class="btns">
           <a class="btn primary" href="#contacto">Quiero cotizar</a>
           <a class="btn" href="#proyectos">Ver proyectos</a>
-          <a class="btn" href="CV_JAIME_ALONSO_CORREA_WEB.pdf" download>Descargar mi CV</a>
+          <a class="btn" href="CV_JAIME_ALONSO_CORREA_WEB.pdf?v=2" download>Descargar mi CV</a>
         </div>
       </div>
       <div class="card">
@@ -98,28 +139,35 @@
       </div>
     </section>
 
+    <!-- ====== PROYECTOS ====== -->
     <section id="proyectos">
       <h2>Proyectos</h2>
       <p class="muted">Algunos trabajos recientes. Pide el tuyo y lo adaptamos a tu perfil profesional.</p>
       <div class="grid-3" id="projectsGrid"></div>
     </section>
 
+    <!-- ====== CV ====== -->
     <section id="cv">
       <h2>Mi CV</h2>
       <div class="card embedwrap">
-        <embed src="CV_JAIME_ALONSO_CORREA_WEB.pdf#toolbar=1&navpanes=0&view=FitH" type="application/pdf" />
-        <p class="muted" style="margin-top:10px">Si no ves el visor, <a href="CV_JAIME_ALONSO_CORREA_WEB.pdf" target="_blank">abre el PDF</a> o <a href="CV_JAIME_ALONSO_CORREA_WEB.pdf" download>descárgalo</a>.</p>
+        <embed src="CV_JAIME_ALONSO_CORREA_WEB.pdf#toolbar=1&navpanes=0&view=FitH&v=2" type="application/pdf" />
+        <p class="muted" style="margin-top:10px">
+          Si no ves el visor, <a href="CV_JAIME_ALONSO_CORREA_WEB.pdf?v=2" target="_blank">abre el PDF</a> o
+          <a href="CV_JAIME_ALONSO_CORREA_WEB.pdf?v=2" download>descárgalo</a>.
+        </p>
       </div>
     </section>
 
+    <!-- ====== CONTACTO ====== -->
     <section id="contacto">
       <h2>Contacto y cotizaciones</h2>
       <div class="grid-2">
         <div class="card">
+          <!-- Reemplaza YOUR_FORMSPREE_ID por el tuyo o pega un iframe de Google Forms -->
           <form action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
             <input name="name" placeholder="Tu nombre" required>
             <input type="email" name="email" placeholder="Tu correo" required>
-            <input name="subject" placeholder="Asunto (ej: CV Profesional)" required>
+            <input name="subject" placeholder="Asunto (ej: Sitio Web / CV)" required>
             <textarea name="message" placeholder="Cuéntame qué necesitas…" required></textarea>
             <button type="submit">Enviar consulta</button>
             <p class="muted">Uso tus datos solo para responder tu solicitud.</p>
@@ -129,8 +177,8 @@
           <h3>También puedes escribir</h3>
           <p>
             📧 <a href="mailto:jialonsocorrea@gmail.com">jialonsocorrea@gmail.com</a><br>
-            🔗 <a href="https://github.com/jialonsoc" target="_blank">GitHub</a>
-            · <a href="https://www.linkedin.com/in/jaime-alonso-4a1b92361/" target="_blank">LinkedIn</a>
+            🔗 <a href="https://github.com/jialonsoc" target="_blank" rel="noopener">GitHub</a>
+            · <a href="https://www.linkedin.com/in/jaime-alonso-4a1b92361/" target="_blank" rel="noopener">LinkedIn</a>
           </p>
           <h3>Proceso</h3>
           <ol>
@@ -146,10 +194,11 @@
   <footer>
     <div class="container" style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
       <small>© <span id="y"></span> Jaime Alonso Correa</small>
-      <small class="muted">Hecho con GitHub Pages</small>
+      <small class="muted">Hecho con GitHub Pages · Build v3</small>
     </div>
   </footer>
 
+  <!-- ====== MODAL / LIGHTBOX ====== -->
   <dialog id="lightbox" class="modal">
     <div class="inner">
       <button class="btn close" onclick="document.getElementById('lightbox').close()">Cerrar ✕</button>
@@ -161,34 +210,82 @@
     </div>
   </dialog>
 
+  <!-- ====== SCRIPTS ====== -->
   <script>
-    const tbtn=document.getElementById('themeBtn');
-    tbtn?.addEventListener('click',()=>{
-      const cur=document.documentElement.getAttribute('data-theme')==='light'?'dark':'light';
-      document.documentElement.setAttribute('data-theme',cur);
-      localStorage.setItem('theme',cur);
-    });
-    document.getElementById('y').textContent=new Date().getFullYear();
+    // Año dinámico
+    document.getElementById('y').textContent = new Date().getFullYear();
 
-    const projects=[
-      {title:"CV Ejecutivo Minimal",thumb:"images/p1.jpg",full:"images/p1.jpg",desc:"CV limpio y compatible con ATS.",tags:["CV","ATS","Diseño"]},
-      {title:"Portfolio Personal Estático",thumb:"images/p2.jpg",full:"images/p2.jpg",desc:"Sitio one-page para mostrar proyectos y contacto.",tags:["Web","HTML/CSS/JS"],link:"https://jialonsoc.github.io"},
-      {title:"CV Académico con logros",thumb:"images/p3.jpg",full:"images/p3.jpg",desc:"Énfasis en publicaciones y docencia.",tags:["CV","Académico"]}
-    ];
-    const grid=document.getElementById('projectsGrid');
-    function tagSpans(tags){return tags.map(t=>`<span>${t}</span>`).join('')}
-    grid.innerHTML=projects.map((p,i)=>`
-      <article class="card project">
-        <img src="${p.thumb}" alt="${p.title}" loading="lazy" data-i="${i}">
-        <h3>${p.title}</h3>
-        <p class="muted">${p.desc}</p>
-        <div class="tags">${tagSpans(p.tags||[])}</div>
-      </article>`).join('');
-    const dlg=document.getElementById('lightbox');const lightImg=document.getElementById('lightImg');const lightTitle=document.getElementById('lightTitle');const lightDesc=document.getElementById('lightDesc');
-    grid.addEventListener('click',e=>{const img=e.target.closest('img[data-i]');if(!img)return;const p=projects[img.dataset.i];lightImg.src=p.full;lightImg.alt=p.title;lightTitle.textContent=p.title;lightDesc.textContent=p.desc;dlg.showModal();});
-    dlg.addEventListener('click',e=>{const r=dlg.getBoundingClientRect();if(!(e.clientX>r.left&&e.clientX<r.right&&e.clientY>r.top&&e.clientY<r.bottom))dlg.close();});
+    // Tema claro/oscuro
+    document.getElementById('themeBtn')?.addEventListener('click', ()=>{
+      const cur = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', cur);
+      localStorage.setItem('theme', cur);
+    });
+
+    // Menú móvil
+    const navBtn = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    navBtn?.addEventListener('click', ()=>{
+      const open = navLinks.classList.toggle('is-open');
+      navBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    navLinks?.addEventListener('click', e=>{
+      if(e.target.closest('a')){ navLinks.classList.remove('is-open'); navBtn.setAttribute('aria-expanded','false'); }
+    });
+
+    // ====== PROYECTOS (NO-CODE): Cargados desde projects.json ======
+    const grid = document.getElementById('projectsGrid');
+    function tagSpans(tags){ return (tags||[]).map(t=>`<span>${t}</span>`).join(''); }
+
+    async function loadProjects(){
+      try{
+        const resp = await fetch('projects.json?v=1');
+        if(!resp.ok) throw new Error('No se pudo cargar projects.json');
+        const projects = await resp.json();
+
+        grid.innerHTML = projects.map((p,i)=>`
+          <article class="card project">
+            <img src="${p.thumb}" alt="${p.title||''}" loading="lazy" data-i="${i}">
+            <div style="display:flex;justify-content:space-between;gap:10px;align-items:center">
+              <h3 style="margin:0">${p.title||''}</h3>
+              ${p.link ? `<a class="btn" href="${p.link}" target="_blank" rel="noopener">Ver</a>` : ``}
+            </div>
+            <p class="muted" style="margin:0">${p.desc||''}</p>
+            <div class="tags">${tagSpans(p.tags)}</div>
+          </article>
+        `).join('');
+
+        // Lightbox
+        const dlg=document.getElementById('lightbox');
+        const lightImg=document.getElementById('lightImg');
+        const lightTitle=document.getElementById('lightTitle');
+        const lightDesc=document.getElementById('lightDesc');
+
+        grid.addEventListener('click', e=>{
+          const img=e.target.closest('img[data-i]');
+          if(!img) return;
+          const p = projects[img.dataset.i];
+          lightImg.src = p.full || p.thumb;
+          lightImg.alt = p.title || '';
+          lightTitle.textContent = p.title || '';
+          lightDesc.textContent = p.desc || '';
+          dlg.showModal();
+        });
+        dlg.addEventListener('click', (e)=>{
+          const r=dlg.getBoundingClientRect();
+          const inside=e.clientX>r.left&&e.clientX<r.right&&e.clientY>r.top&&e.clientY<r.bottom;
+          if(!inside) dlg.close();
+        });
+
+      }catch(err){
+        grid.innerHTML = `<p class="muted">No se pudo cargar la lista de proyectos. Revisa <code>projects.json</code>.</p>`;
+        console.error(err);
+      }
+    }
+    loadProjects();
   </script>
 
+  <!-- SEO JSON-LD -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
