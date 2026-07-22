@@ -1,12 +1,12 @@
 [
   {
-    "title": "Investigación / Paper (ejemplo)",
+    "title": "Predicción de Asfixia Intraparto con CTG",
     "authors": "Jaime Alonso Correa",
     "year": "2026",
-    "venue": "Pontificia Universidad Católica de Chile",
-    "desc": "Reemplaza este ítem con tu paper o investigación. Sube el PDF a la carpeta papers/ y actualiza este archivo.",
-    "tags": ["Investigación", "Académico"],
-    "file": "",
+    "venue": "IMT3140 — Pontificia Universidad Católica de Chile",
+    "desc": "Informe final del pipeline de ML para alerta temprana de asfixia intraparto a partir de cardiotocografía (CTG): metodología sin fugas, validación por paciente e intervalos de confianza.",
+    "tags": ["ML", "CTG", "Salud", "Python", "IMT3140"],
+    "file": "papers/IMT3140_informe_final.pdf",
     "link": "https://github.com/jialonsoc/IMT3140"
   }
 ]
