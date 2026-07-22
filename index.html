@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Jaime Alonso C. — Portafolio & CV</title>
-  <meta name="description" content="Portafolio, CV y proyectos de Jaime Alonso Correa. Contacto para cotizaciones." />
+  <meta name="description" content="Portafolio de Jaime Alonso Correa: dashboards de tracking, automatizaciones de WhatsApp, proyectos web y trabajos académicos." />
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧰</text></svg>">
 
@@ -58,9 +58,14 @@
 
     /* Proyectos */
     .project{display:flex;flex-direction:column;gap:10px}
-    .project img{height:clamp(160px, 24vw, 220px);object-fit:cover;border-radius:12px;border:1px solid var(--border)}
+    .project img{height:clamp(160px, 24vw, 220px);object-fit:cover;border-radius:12px;border:1px solid var(--border);background:#0f172a}
     .tags{display:flex;gap:8px;flex-wrap:wrap}
     .tags span{font-size:12px;border:1px solid var(--border);padding:4px 8px;border-radius:999px;color:var(--muted)}
+
+    /* Papers / académico */
+    .paper{display:flex;flex-direction:column;gap:10px}
+    .paper__meta{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:13px;color:var(--muted)}
+    .paper__actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:auto}
 
     /* Visor PDF adaptativo */
     .embedwrap{height:min(72vh, 900px)}
@@ -109,6 +114,7 @@
       <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">Menú ☰</button>
       <ul class="nav__links" id="navLinks">
         <li><a href="#proyectos">Proyectos</a></li>
+        <li><a href="#academico">Académico</a></li>
         <li><a href="#cv">CV</a></li>
         <li><a href="#contacto">Contacto</a></li>
       </ul>
@@ -120,20 +126,21 @@
     <!-- ====== HERO ====== -->
     <section class="hero">
       <div class="card">
-        <h2>Aplicaciones Web</h2>
-        <p class="muted">Diseño y creación de proyectos web, manejo de bases de datos y transformaciones digitales para empresas y personas.</p>
+        <h2>Dashboards, automatizaciones y web</h2>
+        <p class="muted">Construyo dashboards de tracking, automatizaciones de WhatsApp y aplicaciones web con bases de datos para empresas y proyectos personales.</p>
         <div class="btns">
           <a class="btn primary" href="#contacto">Quiero cotizar</a>
           <a class="btn" href="#proyectos">Ver proyectos</a>
+          <a class="btn" href="#academico">Trabajos académicos</a>
           <a class="btn" href="CV_JAIME_ALONSO_CORREA_WEB.pdf?v=2" download>Descargar mi CV</a>
         </div>
       </div>
       <div class="card">
         <h3>Resumen</h3>
         <ul>
-          <li>✦ Especialista en bases de datos y transformaciones digitales</li>
-          <li>✦ Entrega rápida y asesoría de contenido</li>
-          <li>✦ Soporte post-entrega</li>
+          <li>✦ Dashboards de tracking (Django / datos)</li>
+          <li>✦ Automatizaciones de WhatsApp para negocios</li>
+          <li>✦ Papers e investigaciones académicas</li>
         </ul>
         <p class="muted">*Disponible para proyectos en Chile y remoto.</p>
       </div>
@@ -142,8 +149,15 @@
     <!-- ====== PROYECTOS ====== -->
     <section id="proyectos">
       <h2>Proyectos</h2>
-      <p class="muted">Algunos trabajos recientes. Pide el tuyo y lo adaptamos a tu perfil profesional.</p>
+      <p class="muted">Dashboards de tracking, automatizaciones de WhatsApp y desarrollo web. Pide el tuyo y lo adaptamos a tu negocio.</p>
       <div class="grid-3" id="projectsGrid"></div>
+    </section>
+
+    <!-- ====== TRABAJOS ACADÉMICOS ====== -->
+    <section id="academico">
+      <h2>Trabajos académicos</h2>
+      <p class="muted">Papers e investigaciones. Para agregar uno: sube el PDF a <code>papers/</code> y edita <code>papers.json</code>.</p>
+      <div class="grid-2" id="papersGrid"></div>
     </section>
 
     <!-- ====== CV ====== -->
@@ -194,7 +208,7 @@
   <footer>
     <div class="container" style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
       <small>© <span id="y"></span> Jaime Alonso Correa</small>
-      <small class="muted">Hecho con GitHub Pages · Build v3</small>
+      <small class="muted">Hecho con GitHub Pages · Build v4</small>
     </div>
   </footer>
 
@@ -233,29 +247,30 @@
       if(e.target.closest('a')){ navLinks.classList.remove('is-open'); navBtn.setAttribute('aria-expanded','false'); }
     });
 
-    // ====== PROYECTOS (NO-CODE): Cargados desde projects.json ======
+    // ====== PROYECTOS / PAPERS (NO-CODE): projects.json + papers.json ======
     const grid = document.getElementById('projectsGrid');
+    const papersGrid = document.getElementById('papersGrid');
     function tagSpans(tags){ return (tags||[]).map(t=>`<span>${t}</span>`).join(''); }
+    function esc(s){ return String(s||'').replace(/[&<>"']/g, c=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c])); }
 
     async function loadProjects(){
       try{
-        const resp = await fetch('projects.json?v=1');
+        const resp = await fetch('projects.json?v=2');
         if(!resp.ok) throw new Error('No se pudo cargar projects.json');
         const projects = await resp.json();
 
         grid.innerHTML = projects.map((p,i)=>`
           <article class="card project">
-            <img src="${p.thumb}" alt="${p.title||''}" loading="lazy" data-i="${i}">
+            <img src="${esc(p.thumb)}" alt="${esc(p.title)}" loading="lazy" data-i="${i}">
             <div style="display:flex;justify-content:space-between;gap:10px;align-items:center">
-              <h3 style="margin:0">${p.title||''}</h3>
-              ${p.link ? `<a class="btn" href="${p.link}" target="_blank" rel="noopener">Ver</a>` : ``}
+              <h3 style="margin:0">${esc(p.title)}</h3>
+              ${p.link ? `<a class="btn" href="${esc(p.link)}" target="_blank" rel="noopener">Ver</a>` : ``}
             </div>
-            <p class="muted" style="margin:0">${p.desc||''}</p>
+            <p class="muted" style="margin:0">${esc(p.desc)}</p>
             <div class="tags">${tagSpans(p.tags)}</div>
           </article>
         `).join('');
 
-        // Lightbox
         const dlg=document.getElementById('lightbox');
         const lightImg=document.getElementById('lightImg');
         const lightTitle=document.getElementById('lightTitle');
@@ -282,7 +297,45 @@
         console.error(err);
       }
     }
+
+    async function loadPapers(){
+      try{
+        const resp = await fetch('papers.json?v=1');
+        if(!resp.ok) throw new Error('No se pudo cargar papers.json');
+        const papers = await resp.json();
+
+        if(!papers.length){
+          papersGrid.innerHTML = `<p class="muted">Aún no hay papers publicados. Agrega entradas en <code>papers.json</code>.</p>`;
+          return;
+        }
+
+        papersGrid.innerHTML = papers.map(p=>`
+          <article class="card paper">
+            <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start">
+              <h3 style="margin:0">${esc(p.title)}</h3>
+              ${p.year ? `<span class="tags"><span>${esc(p.year)}</span></span>` : ``}
+            </div>
+            <div class="paper__meta">
+              ${p.authors ? `<span>${esc(p.authors)}</span>` : ``}
+              ${p.venue ? `<span>· ${esc(p.venue)}</span>` : ``}
+            </div>
+            <p class="muted" style="margin:0">${esc(p.desc)}</p>
+            <div class="tags">${tagSpans(p.tags)}</div>
+            <div class="paper__actions">
+              ${p.file ? `<a class="btn primary" href="${esc(p.file)}" target="_blank" rel="noopener">Ver PDF</a>` : ``}
+              ${p.file ? `<a class="btn" href="${esc(p.file)}" download>Descargar</a>` : ``}
+              ${p.link ? `<a class="btn" href="${esc(p.link)}" target="_blank" rel="noopener">Repo / enlace</a>` : ``}
+            </div>
+          </article>
+        `).join('');
+      }catch(err){
+        papersGrid.innerHTML = `<p class="muted">No se pudo cargar la lista académica. Revisa <code>papers.json</code>.</p>`;
+        console.error(err);
+      }
+    }
+
     loadProjects();
+    loadPapers();
   </script>
 
   <!-- SEO JSON-LD -->
@@ -297,7 +350,7 @@
       "https://www.linkedin.com/in/jaime-alonso-4a1b92361/"
     ],
     "email": "mailto:jialonsocorrea@gmail.com",
-    "jobTitle": "Diseñador de CVs y Portafolios"
+    "jobTitle": "Desarrollador web, dashboards y automatizaciones"
   }
   </script>
 </body>

@@ -1,27 +1,26 @@
 [
   {
-    "title": "CV Ejecutivo Minimal",
-    "thumb": "images/p1.jpg",
-    "full": "images/p1.jpg",
-    "desc": "CV limpio y compatible con ATS.",
-    "tags": ["CV", "ATS", "Diseño"],
+    "title": "Dashboard de Tracking de Portfolios",
+    "thumb": "images/tracking.svg",
+    "full": "images/tracking.svg",
+    "desc": "Dashboard en Django para seguimiento de portfolios: métricas, evolución de activos y visualización de datos en tiempo casi real.",
+    "tags": ["Django", "Python", "Dashboard", "Tracking"],
+    "link": "https://github.com/jialonsoc/Portfolio_tracking_django"
+  },
+  {
+    "title": "Automatizaciones de WhatsApp",
+    "thumb": "images/whatsapp.svg",
+    "full": "images/whatsapp.svg",
+    "desc": "Flujos automatizados de atención y seguimiento por WhatsApp: respuestas, recordatorios, leads y notificaciones operativas para negocios.",
+    "tags": ["WhatsApp", "Automatización", "API", "CRM"],
     "link": ""
   },
   {
-    "title": "Portfolio Personal Estático",
-    "thumb": "images/p2.jpg",
-    "full": "images/p2.jpg",
-    "desc": "Sitio one-page para mostrar proyectos y contacto.",
-    "tags": ["Web", "HTML/CSS/JS"],
+    "title": "Portfolio Web Personal",
+    "thumb": "images/portfolio.svg",
+    "full": "images/portfolio.svg",
+    "desc": "Sitio one-page en GitHub Pages para mostrar proyectos, CV y contacto profesional.",
+    "tags": ["HTML/CSS/JS", "GitHub Pages", "Web"],
     "link": "https://jialonsoc.github.io"
-  },
-  {
-    "title": "CV Académico con logros",
-    "thumb": "images/p3.jpg",
-    "full": "images/p3.jpg",
-    "desc": "Énfasis en publicaciones y docencia.",
-    "tags": ["CV", "Académico"],
-    "link": ""
   }
 ]
-
