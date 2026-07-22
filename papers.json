@@ -18,5 +18,15 @@
     "tags": ["Análisis Funcional", "Lax–Milgram", "MAT255I", "Matemáticas"],
     "file": "papers/MAT255I_Lax_Milgram.pdf",
     "link": ""
+  },
+  {
+    "title": "Polinomios ortogonales en cadenas de Markov",
+    "authors": "Alonso, Basulto, Bustos",
+    "year": "2026",
+    "venue": "MAT2605 — Pontificia Universidad Católica de Chile",
+    "desc": "Proyecto sobre la aplicación de polinomios ortogonales en cadenas de Markov: conexión entre bases ortogonales, operadores de transición y análisis espectral.",
+    "tags": ["Polinomios ortogonales", "Cadenas de Markov", "MAT2605", "Matemáticas"],
+    "file": "papers/MAT2605_polinomios_ortogonales_markov.pdf",
+    "link": ""
   }
 ]
