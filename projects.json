@@ -5,15 +5,17 @@
     "full": "images/tracking.svg",
     "desc": "Dashboard en Django para seguimiento de portfolios: métricas, evolución de activos y visualización de datos en tiempo casi real.",
     "tags": ["Django", "Python", "Dashboard", "Tracking"],
-    "link": "https://github.com/jialonsoc/Portfolio_tracking_django"
+    "link": "https://github.com/jialonsoc/Portfolio_tracking_django",
+    "linkLabel": "Ver repo"
   },
   {
     "title": "Automatizaciones de WhatsApp",
     "thumb": "images/whatsapp.svg",
     "full": "images/whatsapp.svg",
-    "desc": "Flujos automatizados de atención y seguimiento por WhatsApp: respuestas, recordatorios, leads y notificaciones operativas para negocios.",
-    "tags": ["WhatsApp", "Automatización", "API", "CRM"],
-    "link": ""
+    "desc": "Flujos de atención y seguimiento por WhatsApp (proyecto privado). Caso de estudio público sin código ni informe confidencial.",
+    "tags": ["WhatsApp", "Automatización", "API", "Privado"],
+    "link": "proyectos/whatsapp-automatizacion.html",
+    "linkLabel": "Caso de estudio"
   },
   {
     "title": "Portfolio Web Personal",
@@ -21,6 +23,7 @@
     "full": "images/portfolio.svg",
     "desc": "Sitio one-page en GitHub Pages para mostrar proyectos, CV y contacto profesional.",
     "tags": ["HTML/CSS/JS", "GitHub Pages", "Web"],
-    "link": "https://jialonsoc.github.io"
+    "link": "https://jialonsoc.github.io",
+    "linkLabel": "Ver sitio"
   }
 ]

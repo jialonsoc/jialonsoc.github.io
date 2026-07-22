@@ -156,7 +156,6 @@
     <!-- ====== TRABAJOS ACADÉMICOS ====== -->
     <section id="academico">
       <h2>Trabajos académicos</h2>
-      <p class="muted">Papers e investigaciones. Para agregar uno: sube el PDF a <code>papers/</code> y edita <code>papers.json</code>.</p>
       <div class="grid-2" id="papersGrid"></div>
     </section>
 
@@ -255,21 +254,25 @@
 
     async function loadProjects(){
       try{
-        const resp = await fetch('projects.json?v=2');
+        const resp = await fetch('projects.json?v=3');
         if(!resp.ok) throw new Error('No se pudo cargar projects.json');
         const projects = await resp.json();
 
-        grid.innerHTML = projects.map((p,i)=>`
+        grid.innerHTML = projects.map((p,i)=>{
+          const external = /^https?:\/\//i.test(p.link||'');
+          const label = p.linkLabel || 'Ver';
+          const linkAttrs = external ? `target="_blank" rel="noopener"` : '';
+          return `
           <article class="card project">
             <img src="${esc(p.thumb)}" alt="${esc(p.title)}" loading="lazy" data-i="${i}">
             <div style="display:flex;justify-content:space-between;gap:10px;align-items:center">
               <h3 style="margin:0">${esc(p.title)}</h3>
-              ${p.link ? `<a class="btn" href="${esc(p.link)}" target="_blank" rel="noopener">Ver</a>` : ``}
+              ${p.link ? `<a class="btn" href="${esc(p.link)}" ${linkAttrs}>${esc(label)}</a>` : ``}
             </div>
             <p class="muted" style="margin:0">${esc(p.desc)}</p>
             <div class="tags">${tagSpans(p.tags)}</div>
-          </article>
-        `).join('');
+          </article>`;
+        }).join('');
 
         const dlg=document.getElementById('lightbox');
         const lightImg=document.getElementById('lightImg');
