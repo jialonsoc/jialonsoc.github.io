@@ -8,5 +8,15 @@
     "tags": ["ML", "CTG", "Salud", "Python", "IMT3140"],
     "file": "papers/IMT3140_informe_final.pdf",
     "link": "https://github.com/jialonsoc/IMT3140"
+  },
+  {
+    "title": "El teorema de Lax–Milgram",
+    "authors": "Jaime Alonso Correa",
+    "year": "2026",
+    "venue": "MAT255I Análisis Funcional — Pontificia Universidad Católica de Chile",
+    "desc": "Trabajo de investigación sobre el teorema de Lax–Milgram en el marco del análisis funcional: formulación, demostración e implicancias en problemas variacionales.",
+    "tags": ["Análisis Funcional", "Lax–Milgram", "MAT255I", "Matemáticas"],
+    "file": "papers/MAT255I_Lax_Milgram.pdf",
+    "link": ""
   }
 ]
