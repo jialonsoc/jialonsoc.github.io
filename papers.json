@@ -28,5 +28,15 @@
     "tags": ["Polinomios ortogonales", "Cadenas de Markov", "MAT2605", "Matemáticas"],
     "file": "papers/MAT2605_polinomios_ortogonales_markov.pdf",
     "link": ""
+  },
+  {
+    "title": "Predicción de presencia de CO en el aire de Santiago",
+    "authors": "Jaime Alonso C.",
+    "year": "2026",
+    "venue": "EYP230I Análisis de Regresión — Pontificia Universidad Católica de Chile",
+    "desc": "Póster académico: modelo de regresión lineal múltiple para predecir la concentración diaria de monóxido de carbono en Santiago con datos SINCA (estación Parque O’Higgins) y variables meteorológicas.",
+    "tags": ["Póster", "Regresión", "CO", "EYP230I", "Medioambiente"],
+    "file": "papers/EYP230I_poster_CO_Santiago.pdf",
+    "link": ""
   }
 ]

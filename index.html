@@ -303,7 +303,7 @@
 
     async function loadPapers(){
       try{
-        const resp = await fetch('papers.json?v=4');
+        const resp = await fetch('papers.json?v=5');
         if(!resp.ok) throw new Error('No se pudo cargar papers.json');
         const papers = await resp.json();
 
